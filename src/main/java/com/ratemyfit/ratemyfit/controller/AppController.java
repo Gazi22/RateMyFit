@@ -1,6 +1,8 @@
 package com.ratemyfit.ratemyfit.controller;
 
+import com.ratemyfit.ratemyfit.model.Address;
 import com.ratemyfit.ratemyfit.model.User;
+import com.ratemyfit.ratemyfit.repository.AddressRepository;
 import com.ratemyfit.ratemyfit.repository.UserRepository;
 import com.ratemyfit.ratemyfit.service.CustomUserDetails;
 import com.ratemyfit.ratemyfit.service.CustomUserDetailsService;
@@ -27,6 +29,9 @@ public class AppController {
     @Autowired
     private UserRepository userRepo;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     @GetMapping("")
     public String viewHomePage() {
         return "orgMainPage";
@@ -35,19 +40,24 @@ public class AppController {
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("address", new Address());
 
         return "signup_form";
     }
 
     @PostMapping("/process_register")
-    public String processRegister(@Valid @ModelAttribute("user") User user) {
+    public String processRegister(@Valid @ModelAttribute("user") User user,@ModelAttribute("address") Address address) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
 
         /*try {*/
+            user.setAddress(address);
+            address.setUser(user);
             userRepo.save(user);
+            addressRepository.save(address);
+
 
     /*    } catch (DataIntegrityViolationException e) {
         System.out.println("User already exist");
@@ -70,11 +80,20 @@ public class AppController {
     @GetMapping("/myFit")
     public String viewMyFitPage() {return "orgMyFit";}
 
+    @GetMapping("/all_fits")
+    public String viewAllFitsPage() {return "all_fits";}
+
     @GetMapping("/myRatingsandComments")
     public String viewMyRatingsandComments() {return "orgMyRatingsandComments";}
 
     @GetMapping("/settings")
     public String viewSettings() {return "orgSettings";}
+
+    @GetMapping("/contact_us")
+    public String viewContactUs() {return "contact_us";}
+
+    @GetMapping("/about_us")
+    public String viewAboutUs() {return "about_us";}
 
     @GetMapping("/mainPage")
     public String viewMainPage() {

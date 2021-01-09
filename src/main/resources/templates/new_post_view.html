@@ -1,0 +1,79 @@
+!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Create New Post</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div align="center">
+    <h1>Create New Product</h1>
+    <br />
+    <form th:action="@{/save}" th:object="${pinwallentry}"
+          method="post" enctype="multipart/form-data">
+
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>Pinwall Text:</td>
+                <td><input type="text" th:field="*{wallentry}" /></td>
+            </tr>
+
+            <tr>
+                <label>Picture: </label>
+                <input type="file" name="imageFile" id="imageFile">
+
+               <!-- &lt;!&ndash;add | accept="image/png, image/jpeg" | for restriction below&ndash;&gt;
+                <input type="file" name="fileImage" id="fileImage" />-->
+            </tr>
+
+            <tr>
+                <img id="thumbnail" alt="Picture Preview" />
+            </tr>
+
+            <tr>
+                <td colspan="2"><button type="submit">Save</button> </td>
+            </tr>
+
+        </table>
+
+
+    </form>
+</div>
+
+<!--<form method="post" enctype="multipart/form-data" action="/uploadImage">
+    <input type="file" name="imageFile">
+    <input type="submit" value="UpLoad"/>
+
+</form>-->
+
+<!--
+https://www.youtube.com/watch?v=-Xf_fbKQit8
+-->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $('#imageFile').change(function(){
+            showImageThumbnail(this);
+        });
+
+    });
+
+    function showImageThumbnail(fileInput){
+        file = fileInput.files[0];
+        reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#thumbnail').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+
+
+</script>
+
+</body>
+</html>

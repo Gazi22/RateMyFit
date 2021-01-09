@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Product Manager</title>
+</head>
+<body>
+<div align="center">
+    <h1>Pinwallentries</h1>
+    <a href="/new">Create New Pinwallentry</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Pinwallentry ID</th>
+            <th>Text</th>
+            <th>Author</th>
+            <th>Picture</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pinwallentry : ${listPinwallentry}">
+            <td th:text="${pinwallentry.id}">Pinwallentry ID</td>
+            <td th:text="${pinwallentry.wallentry}">Text</td>
+            <td th:text="${pinwallentry.getAuthorName()}">Author</td>
+            <td> <img th:src="@{${pinwallentry.outfitImagePath}}" style="width: 100px"></td>
+            <td th:text="${pinwallentry.postOn}">Posted on</td>
+            <!-- th:text="${pinwallentry.picture}">Text-->
+
+            <td>
+                <!--<a th:href="/@{'/edit/' + ${pinwallentry.id}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;-->
+                <a th:href="@{'/delete/' + ${pinwallentry.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

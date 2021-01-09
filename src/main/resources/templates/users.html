@@ -40,19 +40,25 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
             <thead class="thead-dark">
             <tr>
                 <th>User ID</th>
+                <th>Username</th>
                 <th>E-mail</th>
                 <th>First Name</th>
                 <th>Last Name</th>
+                <th>Street Name</th>
+                <th>City Name</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user: ${listUsers}">
                 <td th:text="${user.id}">User ID</td>
+                <td th:text="${user.username}">Username</td>
                 <td th:text="${user.email}">E-mail</td>
                 <td th:text="${user.firstName}">First Name</td>
                 <td th:text="${user.lastName}">Last Name</td>
+                <td th:text="${user.getAddress().streetName}">Street Name</td>
+                <td th:text="${user.getAddress().cityName}">City Name</td>
                 <td sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN')"
-                    th:text="${user.getRoleName()}">Authority </td>
+                    th:text="${user}">Authority </td>
             </tr>
             </tbody>
         </table>
