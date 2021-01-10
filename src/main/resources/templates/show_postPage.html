@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<h2>List of all trade</h2>
+<form th:action="@{/findPost}"  method="GET">
+    <input type="text" th:value="${userEmail}" placeholder="Search post" />
+    <input type="submit" value="Search" />
+</form>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Post ID</th>
+        <th>Post Text</th>
+        <th>Post Picture</th>
+        <th>Post Date</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pinwallentry : ${listPinwallentry}">
+        <td th:text="${pinwallentry.id}"></td>
+        <td th:text="${pinwallentry.wallentry}"></td>
+        <td> <img th:src="@{${pinwallentry.outfitImagePath}}" style="width: 100px"></td>
+        <td th:text="${pinwallentry.postOn}"></td>
+
+        <!--<td><a th:href="@{/mosque/update(id=${pinwallentry.id})}">Update</a>
+            &nbsp; <a th:href="@{/mosque/delete(id=${pinwallentry.id})}"-->
+                      <!--onclick="if(!(confirm('Are you sure you want to update?'))) return false">Delete</a></td>-->
+    </tr>
+
+    </tbody>
+</table>
+
+<form th:action="@{/findPost}" method="GET">
+    <input type="text"  th:value="${userEmail}" placeholder="Search people" />
+    <input type="submit" value="Search" />
+</form>

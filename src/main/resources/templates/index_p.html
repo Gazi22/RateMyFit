@@ -25,7 +25,7 @@
             <td th:text="${pinwallentry.wallentry}">Text</td>
             <td th:text="${pinwallentry.getAuthorName()}">Author</td>
             <td> <img th:src="@{${pinwallentry.outfitImagePath}}" style="width: 100px"></td>
-            <td th:text="${pinwallentry.postOn}">Posted on</td>
+            <td th:text="${#dates.format(pinwallentry.postOn, 'dd-MM-yyyy HH:mm:ss')}">Date</td>
             <!-- th:text="${pinwallentry.picture}">Text-->
 
             <td>

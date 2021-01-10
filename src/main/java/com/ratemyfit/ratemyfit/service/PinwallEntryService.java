@@ -3,6 +3,7 @@ package com.ratemyfit.ratemyfit.service;
 import java.util.List;
 
 import com.ratemyfit.ratemyfit.model.PinwallEntry;
+import com.ratemyfit.ratemyfit.model.User;
 import com.ratemyfit.ratemyfit.repository.PinwallEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,15 @@ public class PinwallEntryService {
     @Autowired
     private PinwallEntryRepository pinwallEntryRepository;
 
-    public List<PinwallEntry> listAll() {
+
+    public List<PinwallEntry> listAll(Long id) {
+        if (id != null){
+            return pinwallEntryRepository.search(id);
+        }
         return pinwallEntryRepository.findAll();
     }
+
+
 
     public PinwallEntry save(PinwallEntry pinwallEntry) {
         pinwallEntryRepository.save(pinwallEntry);

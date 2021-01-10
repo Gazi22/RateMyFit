@@ -15,6 +15,8 @@ public interface PinwallEntryRepository extends JpaRepository<PinwallEntry, Long
     @Query("SELECT u FROM PinwallEntry u WHERE u.id = ?1")
     public PinwallEntry findbyentryid(Long id);
 
+    @Query("SELECT p FROM PinwallEntry p WHERE p.id = ?1")
+    public List<PinwallEntry> search(Long id);
 
     /*List<PinwallEntry> findbyuser(User user);*/
 }

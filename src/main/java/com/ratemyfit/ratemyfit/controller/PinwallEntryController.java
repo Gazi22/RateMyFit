@@ -4,10 +4,12 @@ package com.ratemyfit.ratemyfit.controller;
 
 import com.ratemyfit.ratemyfit.model.PinwallEntry;
 import com.ratemyfit.ratemyfit.model.User;
+import com.ratemyfit.ratemyfit.repository.PinwallEntryRepository;
 import com.ratemyfit.ratemyfit.service.CustomUserDetails;
 import com.ratemyfit.ratemyfit.service.CustomUserDetailsService;
 import com.ratemyfit.ratemyfit.service.PinwallEntryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -33,9 +35,12 @@ public class PinwallEntryController {
     @Autowired
     private PinwallEntryService pinwallEntryService;
 
+
+
     @RequestMapping("/index_p")
     public String viewPinwallentryPage(Model model) {
-        List<PinwallEntry> listPinwallentry = pinwallEntryService.listAll();
+        Long id = null;
+        List<PinwallEntry> listPinwallentry = pinwallEntryService.listAll(id);
         model.addAttribute("listPinwallentry", listPinwallentry);
 
         return "index_p";
@@ -106,29 +111,19 @@ public class PinwallEntryController {
         return "redirect:/";
     }
 
-    /*@PostMapping("/uploadImage")
-    public String uploadImage(PinwallEntry pinwallEntry, @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
-        String returnValue = "";
-        String folder = "/photos/";
-        byte[] bytes = imageFile.getBytes();*/
+    @GetMapping("/findPost")
+    public String findPost(Model model, @Param(value="id") Long id) {
 
 
-      /*  try {
-            Path path = Paths.get(folder + imageFile.getOriginalFilename());
-            Files.write(path, bytes);
-            PinwallEntry savedPinwallEntry = pinwallEntryService.save(pinwallEntry);
-*/
-        /*} catch (Exception e) {
-            e.printStackTrace();
 
-*/
-           /* returnValue = "error";
-        }
-            return "redirect:/";
+        List<PinwallEntry> listPinwallentry = pinwallEntryService.listAll(id);
 
 
-        }*/
+        model.addAttribute("id", id);
+        model.addAttribute("listPinwallentry", listPinwallentry);
 
+        return "show_postPage";
+    }
 
     }
 
