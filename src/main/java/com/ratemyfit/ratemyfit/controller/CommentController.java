@@ -67,7 +67,7 @@ public class CommentController {
         comment.setPinwallEntry(pinwallEntryService.getPinwallentryForID(id));
         comment.setUser(user);
         commentService.save(comment);
-        return "redirect:/";
+        return "ratings_comments";
     }
 
    @RequestMapping("/edit_c/{id}")
