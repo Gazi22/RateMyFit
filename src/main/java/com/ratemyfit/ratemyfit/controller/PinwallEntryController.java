@@ -1,147 +1,52 @@
 package com.ratemyfit.ratemyfit.controller;
-
-//https://www.codejava.net/frameworks/spring-boot/spring-boot-crud-example-with-spring-mvc-spring-data-jpa-thymeleaf-hibernate-mysql
-
-import com.ratemyfit.ratemyfit.model.Comment;
-import com.ratemyfit.ratemyfit.model.PinwallEntry;
-import com.ratemyfit.ratemyfit.model.User;
-import com.ratemyfit.ratemyfit.service.CommentService;
-import com.ratemyfit.ratemyfit.service.CustomUserDetails;
-import com.ratemyfit.ratemyfit.service.CustomUserDetailsService;
-import com.ratemyfit.ratemyfit.service.PinwallEntryService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Calendar;
 import java.util.List;
+import static org.springframework.http.ResponseEntity.status;
 
-//https://www.codejava.net/frameworks/spring-boot/spring-boot-crud-example-with-spring-mvc-spring-data-jpa-thymeleaf-hibernate-mysql
-
-@Controller
+@RestController
+@RequestMapping("/api/posts/")
 public class PinwallEntryController {
 
-    CustomUserDetailsService customUserDetailsService;
+/*
+    private final PostService postService;
+*/
 
-    @Autowired
-    private PinwallEntryService pinwallEntryService;
-    @Autowired
-    private CommentService commentService;
+    /*@PostMapping
+    public ResponseEntity<Void> createPost(@RequestBody PostRequest postRequest) {
+        postService.save(postRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }*/
 
-
-    @RequestMapping("/index_p")
-    public String viewPinwallentryPage(Model model) {
-        Long id = null;
-        List<PinwallEntry> listPinwallentry = pinwallEntryService.listAll(id);
-        model.addAttribute("listPinwallentry", listPinwallentry);
-
-        return "index_p";
+/*
+    @GetMapping
+    public ResponseEntity<List<PostResponse>> getAllPosts() {
+        return status(HttpStatus.OK).body(postService.getAllPosts());
     }
+*/
 
-    @RequestMapping("/my_fit")
-    public String viewMyFit(Model model) {
-        CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        User user = customUserDetails.getUser();
-
-        List<PinwallEntry> listPinwallentry = pinwallEntryService.listAllCurrentUserPosts(user.getId());
-
-
-        model.addAttribute("listPinwallentry", listPinwallentry);
-
-        return "my_fit";
+/*
+    @GetMapping("/{id}")
+    public ResponseEntity<PostResponse> getPost(@PathVariable Long id) {
+        return status(HttpStatus.OK).body(postService.getPost(id));
     }
+*/
 
-    @RequestMapping("/new")
-    public String showNewPinwallEntryPage(Model model) {
-        PinwallEntry pinwallEntry = new PinwallEntry();
-        model.addAttribute("pinwallentry", pinwallEntry);
-
-        return "upload_your_fit";
+/*
+    @GetMapping("by-subreddit/{id}")
+    public ResponseEntity<List<PostResponse>> getPostsBySubreddit(Long id) {
+        return status(HttpStatus.OK).body(postService.getPostsBySubreddit(id));
     }
+*/
 
-    //https://www.codejava.net/frameworks/spring-boot/spring-boot-file-upload-tutorial
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String savePinwallEntry(PinwallEntry pinwallEntry, @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
-
-
-
-
-        String returnValue = "";
-        String folder = "./outfits/";
-        byte[] bytes = imageFile.getBytes();
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-
-        CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-
-        User author = customUserDetails.getUser();
-        pinwallEntry.setPostOn(Calendar.getInstance());
-        pinwallEntry.setPicture(imageFile.getOriginalFilename());
-        pinwallEntry.setAuthor(author);
-        pinwallEntryService.save(pinwallEntry);
-
-        try {
-            Path path = Paths.get(folder + imageFile.getOriginalFilename());
-            Files.write(path, bytes);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-
-            returnValue = "error";
-        }
-        return "my_fit";
-
-
+/*
+    @GetMapping("by-user/{name}")
+    public ResponseEntity<List<PostResponse>> getPostsByUsername(String username) {
+        return status(HttpStatus.OK).body(postService.getPostsByUsername(username));
     }
-
-
-    @RequestMapping("/edit/{id}")
-    public ModelAndView showEditPinwallEntryPage(@PathVariable(name = "id") int id) {
-        ModelAndView mav = new ModelAndView("edit_PinwallEntry");
-        PinwallEntry pinwallEntry = pinwallEntryService.get(id);
-        mav.addObject("pinwallEntry", pinwallEntry);
-
-        return mav;
-    }
-
-
-    @RequestMapping("/delete/{id}")
-    public String deletePinwallEntry(@PathVariable(name = "id") int id) {
-        pinwallEntryService.delete(id);
-        return "redirect:/";
-    }
-
-    @RequestMapping("/find_post/{id}")
-    public String findPost(Model model,Comment comment, @PathVariable(name="id") Long id) {
-
-        comment = new Comment();
-
-        List<PinwallEntry> listPinwallentry = pinwallEntryService.listAll(id);
-        List<Comment> listComment= commentService.listAll(id);
-
-        model.addAttribute("id", id);
-        model.addAttribute("listPinwallentry", listPinwallentry);
-        model.addAttribute("listComment", listComment);
-        model.addAttribute("comment", comment);
-        return "rate_my_fit_post";
-    }
+*/
 
 
 
-    }
-
+}
