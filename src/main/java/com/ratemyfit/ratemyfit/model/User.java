@@ -20,6 +20,9 @@ public class User {
     @Column(nullable = false, unique = true, length = 45)
     private String email;
 
+    @Column(nullable = false, length = 12)
+    private String username;
+
     @Column(nullable = false, length = 64)
     private String password;
 
@@ -54,6 +57,14 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinColumn(name = "PINWALL_ID")
     protected Set<PinwallEntry> pinwallEntries=new HashSet<PinwallEntry>();
+
+
+
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Address address;
+
 
     public String getEmail() {
         return email;
@@ -100,8 +111,10 @@ public class User {
     }
 
     public String getRoleName(){
+
         return roles.stream().map(Role::getName).collect(Collectors.joining(","));
     }
+
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
@@ -111,5 +124,20 @@ public class User {
         return roles.toString();
     }
 
+    public String getUsername() {
+        return username;
+    }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }

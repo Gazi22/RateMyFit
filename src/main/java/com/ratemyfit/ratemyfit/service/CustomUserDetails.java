@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import com.ratemyfit.ratemyfit.model.Address;
 import com.ratemyfit.ratemyfit.model.Role;
 import com.ratemyfit.ratemyfit.model.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class CustomUserDetails implements UserDetails {
 
     private User user;
+
 
     public CustomUserDetails(User user) {
         this.user = user;
@@ -32,6 +34,8 @@ public class CustomUserDetails implements UserDetails {
 
         return authorities;
     }
+
+
 
     @Override
     public String getPassword() {
@@ -68,4 +72,15 @@ public class CustomUserDetails implements UserDetails {
         return user.getFirstName() + " " + user.getLastName();
     }
 
+    public String getStreetName(){return user.getAddress().getStreetName();}
+
+    public String getCityName(){return user.getAddress().getCityName();}
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

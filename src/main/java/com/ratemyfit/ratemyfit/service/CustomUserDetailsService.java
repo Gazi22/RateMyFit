@@ -1,4 +1,5 @@
 package com.ratemyfit.ratemyfit.service;
+import com.ratemyfit.ratemyfit.model.PinwallEntry;
 import com.ratemyfit.ratemyfit.model.User;
 import com.ratemyfit.ratemyfit.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepo;
+
+    public User findByEmail(String email){
+        return userRepo.findByEmail(email);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

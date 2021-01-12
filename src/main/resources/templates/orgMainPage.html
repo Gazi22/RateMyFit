@@ -18,14 +18,15 @@
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(254,9,9);opacity: 1;background: linear-gradient(rgb(119,63,63) 10%, rgb(146,94,49) 51%, rgb(211,168,15) 100%), linear-gradient(black, white);">
         <div class="container"><a class="navbar-brand logo" th:href="@{/mainPage}" style="color: rgb(255,255,255);background: linear-gradient(rgb(198,164,44), rgb(186,170,91)), #983b3b;font-size: 30px;width: 180px;padding: 13px;">Rate My Fit</a><button data-toggle="collapse" class="navbar-toggler"
                 data-target="#navbarNav" style="color: rgb(255,0,0);"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarNav" style="background: linear-gradient(rgb(190,176,53) 55%, rgb(177,158,56)), #8c3131;font-size: 20px;padding: 13px;margin: 2px;">
+            <div class="collapse navbar-collapse" id="navbarNav" style="background: linear-gradient(rgb(190,176,53) 55%, rgb(177,158,56)), #8c3131;font-size: 20px;padding: 13px;margin: 2px;"><a th:href="@{/mainPage}" style="border-color: rgb(255,255,255);color: rgb(255,255,255);">Home</a>
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link active" th:href="@{/mainPage}">Browse</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/myFit}">My Fit</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/myRatingsandComments}">My Ratings / My Comments</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/settings}">Settings</a></li></ul>
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/all_fits}">All Fits</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/index_p}">My Fit</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/index_c}">My Ratings / My Comments</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/findPost}">Settings</a></li></ul>
 
                 <a th:href="@{/register}"><button class="btn btn-primary" type="button">Register</button></a>
+                &nbsp;
                 <a th:href="@{/login}"><button class="btn btn-primary" type="button">Login</button></a></div>
 
         </div>
@@ -51,7 +52,9 @@
     <section class="portfolio-block call-to-action border-bottom">
         <div class="container">
             <div class="d-flex justify-content-center align-items-center content">
-                <h3>You Like what you see?</h3><button class="btn btn-outline-primary btn-lg" type="button" style="background: #000000;border-color: rgb(201,181,74);color: rgb(255,255,255);">Check out new Fits!</button></div>
+                <h3>You Like what you see?</h3>
+                <a th:href="@{/all_fits}"class="btn btn-outline-primary btn-lg" style="background: #000000;border-color: rgb(201,181,74);color: rgb(255,255,255);">Check out new Fits!</a>
+            </div>
         </div>
     </section>
     <section class="portfolio-block skills">
@@ -111,7 +114,7 @@
     </section>
     <footer class="page-footer" style="background: rgb(231,190,85);">
         <div class="container">
-            <div class="links"><a href="#">About Us</a><a href="#">Contact Us</a><a href="#">Feedback</a></div>
+            <div class="links"><a th:href="@{/about_us}" >About Us</a><a th:href="@{/contact_us}">Contact Us</a><a href="#">Feedback</a></div>
             <div class="social-icons"><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-facebook"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-instagram-outline"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-twitter"></i></a></div>
         </div>
     </footer>

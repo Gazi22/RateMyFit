@@ -1,20 +1,17 @@
 package com.ratemyfit.ratemyfit.controller;
 
+import com.ratemyfit.ratemyfit.model.Address;
 import com.ratemyfit.ratemyfit.model.User;
+import com.ratemyfit.ratemyfit.repository.AddressRepository;
 import com.ratemyfit.ratemyfit.repository.UserRepository;
-import com.ratemyfit.ratemyfit.service.CustomUserDetails;
-import com.ratemyfit.ratemyfit.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.net.Authenticator;
 import java.util.List;
 
 //https://www.codejava.net/frameworks/spring-boot/user-registration-and-login-tutorial
@@ -27,27 +24,37 @@ public class AppController {
     @Autowired
     private UserRepository userRepo;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     @GetMapping("")
     public String viewHomePage() {
-        return "orgMainPage";
+        return "homepage";
     }
+
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("address", new Address());
 
-        return "signup_form";
+        return "register2";
     }
 
     @PostMapping("/process_register")
-    public String processRegister(@Valid @ModelAttribute("user") User user) {
+    public String processRegister(@Valid @ModelAttribute("user") User user,@ModelAttribute("address") Address address) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
 
         /*try {*/
+
+            user.setAddress(address);
+            address.setUser(user);
             userRepo.save(user);
+            addressRepository.save(address);
+
 
     /*    } catch (DataIntegrityViolationException e) {
         System.out.println("User already exist");
@@ -67,18 +74,26 @@ public class AppController {
         return "users";
     }
 
-    @GetMapping("/myFit")
-    public String viewMyFitPage() {return "orgMyFit";}
 
-    @GetMapping("/myRatingsandComments")
-    public String viewMyRatingsandComments() {return "orgMyRatingsandComments";}
 
-    @GetMapping("/settings")
-    public String viewSettings() {return "orgSettings";}
+    @GetMapping("/all_fits")
+    public String viewAllFitsPage() {return "all_fits_old";}
 
-    @GetMapping("/mainPage")
-    public String viewMainPage() {
-        return "orgMainPage";
+    @GetMapping("/ratings_comments")
+    public String viewMyRatingsandComments() {return "ratings_comments";}
+
+    @GetMapping("/profile")
+    public String viewSettings() {return "profile";}
+
+    @GetMapping("/contact_us")
+    public String viewContactUs() {return "contact_us";}
+
+    @GetMapping("/about_us")
+    public String viewAboutUs() {return "about_us";}
+
+    @GetMapping("/homepage")
+    public String viewHomepage() {
+        return "homepage";
     }
 
    @RequestMapping(value = "/username", method = RequestMethod.GET)
@@ -98,6 +113,15 @@ public class AppController {
         return "users";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model, String error, String logout) {
+        if (error != null)
+            model.addAttribute("errorMsg", "Your username and password are invalid.");
 
+        if (logout != null)
+            model.addAttribute("msg", "You have been logged out successfully.");
+
+        return "login";
+    }
 
 }
