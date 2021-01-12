@@ -38,7 +38,7 @@ public class AppController {
         model.addAttribute("user", new User());
         model.addAttribute("address", new Address());
 
-        return "register2";
+        return "register";
     }
 
     @PostMapping("/process_register")
