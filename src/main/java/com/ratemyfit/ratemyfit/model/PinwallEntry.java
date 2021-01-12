@@ -6,11 +6,15 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.Authentication;
 
 import javax.persistence.*;
-import java.util.Calendar;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @Table(name = "wall")
 public class PinwallEntry {
+
+
 
     @Id
     @GeneratedValue(generator = "generator")
@@ -30,6 +34,14 @@ public class PinwallEntry {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author")
     private User author;
+
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "pinwall_id")
+    protected Set<Comment> comment=new HashSet<>();
+
+
+
 
 
  /*   @Column(name="rating")
@@ -98,7 +110,59 @@ public class PinwallEntry {
         return"/outfits/"+ picture;
     }
 
+    public String getWallEntry() {
+        return wallEntry;
+    }
 
+    public void setWallEntry(String wallEntry) {
+        this.wallEntry = wallEntry;
+    }
 
+    public Set<Comment> getComment() {
+        return comment;
+    }
+
+    public List<String> getCommentText(){
+
+            return comment.stream().map(Comment::getCommentText).collect(Collectors.toList());
+
+    }
+
+    public List<String> getCommentUser(){
+
+        return comment.stream().map(Comment::getUserName).collect(Collectors.toList());
+
+    }
+
+    public String getBoth(){
+
+         List<String> list1= comment.stream().map(Comment::getUserName).collect(Collectors.toList());
+         List<String> list2 =comment.stream().map(Comment::getCommentText).collect(Collectors.toList());
+
+         List<String> newList = new ArrayList<>();
+
+        
+        for (int i=0;i<list1.size();){
+            newList.add(list1.get(i));
+            i++;
+            for (int j=i-1;j<i;j++){
+                newList.add(list2.get(j));
+
+            }
+
+        }
+
+        String usernameAndComment = "";
+        String delimiter = ",";
+        for (String comment : newList) {
+            usernameAndComment += usernameAndComment.equals("") ? comment : delimiter + comment;
+        }
+
+        return usernameAndComment;
+    }
+
+    public void setComment(Set<Comment> comment) {
+        this.comment = comment;
+    }
 }
 

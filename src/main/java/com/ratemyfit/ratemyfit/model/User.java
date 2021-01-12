@@ -58,9 +58,7 @@ public class User {
     @JoinColumn(name = "PINWALL_ID")
     protected Set<PinwallEntry> pinwallEntries=new HashSet<PinwallEntry>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "user_id")
-    protected Set<Comment> comment=new HashSet<Comment>();
+
 
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)

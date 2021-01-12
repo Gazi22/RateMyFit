@@ -41,7 +41,7 @@ public class PinwallEntryRepositoryTest {
         user1.setPassword("Floria4n2020");
         user1.setFirstName("Florian");
         user1.setLastName("Jäger");
-        pinwallEntry.setText("Moin Leuoode");
+        pinwallEntry.setWallentry("Moin Leuoode");
         pinwallEntry.setPostOn(Calendar.getInstance());
         pinwallEntry.setAuthor(user1);
 

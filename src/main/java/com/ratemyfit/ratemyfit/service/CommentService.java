@@ -19,7 +19,19 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    public List<Comment> listAll() {
+
+
+    public List<Comment> listAll(Long id) {
+        if (id != null){
+            return commentRepository.search(id);
+        }
+        return commentRepository.findAll();
+    }
+
+    public List<Comment> listAllCurrentUser(Long id) {
+        if (id != null){
+            return commentRepository.listAllCurrentUser(id);
+        }
         return commentRepository.findAll();
     }
 

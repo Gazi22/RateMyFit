@@ -1,12 +1,8 @@
 package com.ratemyfit.ratemyfit;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import com.ratemyfit.ratemyfit.model.Comment;
-import com.ratemyfit.ratemyfit.model.PinwallEntry;
+import com.ratemyfit.ratemyfit.model.Address;
 import com.ratemyfit.ratemyfit.model.User;
-import com.ratemyfit.ratemyfit.repository.CommentRepository;
-import com.ratemyfit.ratemyfit.repository.PinwallEntryRepository;
+import com.ratemyfit.ratemyfit.repository.AddressRepository;
 import com.ratemyfit.ratemyfit.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,29 +16,33 @@ import java.util.Calendar;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
-public class UserRepositoryTests {
+public class AddressRepositoryTest {
 
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     @Autowired
     private UserRepository userRepo;
 
+
     @Autowired
     private TestEntityManager entityManager;
 
+
     @Test
-    public void testCreateUser(){
-        User user = new User();
-        user.setEmail("kek999@gmail.com");
-        user.setPassword("Florian2020");
-        user.setFirstName("Florian");
-        user.setLastName("Jäger");
+    public void testCreateAddress(){
+       Address address = new Address();
 
-        User savedUser = userRepo.save(user);
+        User user1 = userRepo.findByEmail("test3@test.com");
+        address.setId(user1.getId());
+        address.setStreetName("Teststreet3");
+        address.setCityName("Testy3");
+        address.setUser(user1);
 
-        User existUser = entityManager.find(User.class, savedUser.getId());
+        userRepo.save(user1);
+        addressRepository.save(address);
 
-        assertThat(existUser.getEmail()).isEqualTo(user.getEmail());
+
     }
-
-
 }

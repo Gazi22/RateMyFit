@@ -3,9 +3,11 @@ package com.ratemyfit.ratemyfit.controller;
 //https://www.codejava.net/frameworks/spring-boot/spring-boot-crud-example-with-spring-mvc-spring-data-jpa-thymeleaf-hibernate-mysql
 
 import com.ratemyfit.ratemyfit.model.Comment;
+import com.ratemyfit.ratemyfit.model.PinwallEntry;
 import com.ratemyfit.ratemyfit.model.User;
 import com.ratemyfit.ratemyfit.service.CommentService;
 import com.ratemyfit.ratemyfit.service.CustomUserDetails;
+import com.ratemyfit.ratemyfit.service.PinwallEntryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,9 +30,13 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private PinwallEntryService pinwallEntryService;
+
     @RequestMapping("/index_c")
     public String viewCommentPage(Model model) {
-        List<Comment> listComment= commentService.listAll();
+        Long id = null;
+        List<Comment> listComment= commentService.listAll(id);
         model.addAttribute("listComment", listComment);
 
         return "index_c";
@@ -45,15 +51,20 @@ public class CommentController {
     }
 
 
-    @RequestMapping(value = "/save_c", method = RequestMethod.POST)
-    public String saveComment(@ModelAttribute("comment") Comment comment) {
+
+
+    @RequestMapping(value = "/save_c/{id}", method = RequestMethod.POST)
+    public String saveComment(Comment comment,@PathVariable(name="id") Long id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
         CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+
+
         User user = customUserDetails.getUser();
         comment.setCreatedDate(Calendar.getInstance().toInstant());
+        comment.setPinwallEntry(pinwallEntryService.getPinwallentryForID(id));
         comment.setUser(user);
         commentService.save(comment);
         return "redirect:/";
@@ -75,6 +86,24 @@ public class CommentController {
         return "redirect:/";
     }
 
+
+    @RequestMapping("/find_comments")
+    public String findComments(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User user = customUserDetails.getUser();
+
+        List<Comment> listComment = commentService.listAllCurrentUser(user.getId());
+
+
+        model.addAttribute("listComment", listComment);
+
+        return "ratings_comments";
+    }
 
 
 }

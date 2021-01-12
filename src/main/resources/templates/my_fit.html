@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-            style="background: #e7be55;">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Contact - Brand</title>
+    <title>Projects - Brand</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
@@ -33,20 +32,22 @@
 
     </div>
     </nav>
-    <main class="page contact-page">
-        <section class="portfolio-block contact" style="background: #debd47;">
-            <div class="container">
-                <div class="heading">
-                    <h2>Contact US / Give us feedback!</h2>
-                </div>
-                <form>
-                    <div class="form-group"><label for="name">Your Name</label><input class="form-control item" type="text" id="name"></div>
-                    <div class="form-group"><label for="subject">Subject</label><input class="form-control item" type="text" id="subject"></div>
-                    <div class="form-group"><label for="email">Email</label><input class="form-control item" type="email" id="email"></div>
-                    <div class="form-group"><label for="message">Message</label><textarea class="form-control item" id="message"></textarea></div>
-                    <div class="form-group"><button class="btn btn-primary btn-block btn-lg" type="submit">Submit Form</button></div>
-                </form>
-            </div>
+    <main class="page projects-page">
+        <section class="portfolio-block projects-cards" style="background: rgb(231,190,85);">
+            <table style="width: 100%">
+
+                <tr th:each="pinwallentry : ${listPinwallentry}">
+                    <div class="row no-gutters"style="width: 25rem; display: inline-block">
+                        <div class="col-md-6 col-lg-4 item zoom-on-hover">
+                            <a th:href="@{'/find_post/' + ${pinwallentry.id}}"><img class="img-fluid image" data-bs-hover-animate="pulse" th:src="@{${pinwallentry.outfitImagePath}}"  loading="eager">
+                                <span class="description"><span class="description-heading">Text</span>
+                    <span class="description-body" th:text="${pinwallentry.wallentry}"></span></span></a>
+                        </div>
+                    </div>
+
+                </tr>
+            </table>
+
         </section>
     </main>
     <footer class="page-footer" style="background: rgb(231,190,85);">

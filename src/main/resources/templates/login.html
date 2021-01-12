@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-            style="background: #e7be55;">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -12,10 +11,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arbutus">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
-<link rel="stylesheet" href="C:\Users\gazme\Desktop\Internet Technology Project - Rate My Fit\Background_CSS_Code.css" />
 </head>
 
-<body>
+<body style="color: rgb(0,0,0);background: rgb(231,190,85);">
 <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(254,9,9);opacity: 1;background: linear-gradient(rgb(119,63,63) 10%, rgb(146,94,49) 51%, rgb(211,168,15) 100%), linear-gradient(black, white);">
     <div class="container"><a class="navbar-brand logo" th:href="@{/homepage}" style="color: rgb(255,255,255);background: linear-gradient(rgb(198,164,44), rgb(186,170,91)), #983b3b;font-size: 30px;width: 180px;padding: 13px;">Rate My Fit</a><button data-toggle="collapse" class="navbar-toggler"
                                                                                                                                                                                                                                                          data-target="#navbarNav" style="color: rgb(255,0,0);"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -25,7 +23,7 @@
                 <li class="nav-item"><a class="nav-link active" th:href="@{/all_fits}">All Fits</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/my_fit}">My Fit</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/ratings_comments}">Ratings / Comments</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/profile}">Profile</a></li></ul>
+                <li class="nav-item"><a class="nav-link" th:href="@{/profile}">Settings</a></li></ul>
 
             <a th:href="@{/register}"><button class="btn btn-primary" type="button">Register</button></a>
             &nbsp;
@@ -34,24 +32,32 @@
     </div>
     </nav>
     <main class="page contact-page">
-        <section class="portfolio-block contact" style="background: #debd47;">
-            <div class="container">
+        <section class="portfolio-block contact" style="background: #c9b131;">
+            <div class="container" style="background: #c9b131;">
                 <div class="heading">
-                    <h2>Contact US / Give us feedback!</h2>
+                    <h2>Login</h2>
                 </div>
-                <form>
-                    <div class="form-group"><label for="name">Your Name</label><input class="form-control item" type="text" id="name"></div>
-                    <div class="form-group"><label for="subject">Subject</label><input class="form-control item" type="text" id="subject"></div>
-                    <div class="form-group"><label for="email">Email</label><input class="form-control item" type="email" id="email"></div>
-                    <div class="form-group"><label for="message">Message</label><textarea class="form-control item" id="message"></textarea></div>
-                    <div class="form-group"><button class="btn btn-primary btn-block btn-lg" type="submit">Submit Form</button></div>
+                <form method="POST" action="/login" class="form-signin">
+                    <h2 class="form-heading">Log in</h2>
+
+                    <div class="form-group ">
+                        <span></span>
+                        <input name="username" type="text" class="form-control" placeholder="Username"
+                               autofocus="true"/>
+                        <input name="password" type="password" class="form-control" placeholder="Password"/>
+                        <span></span>
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+                    </div>
+
                 </form>
             </div>
         </section>
     </main>
     <footer class="page-footer" style="background: rgb(231,190,85);">
         <div class="container">
-            <div class="links"><a th:href="@{/about_us}" >About Us</a><a th:href="@{/contact_us}">Contact Us</a>   </div>            <div class="social-icons"><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-facebook"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-instagram-outline"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-twitter"></i></a></div>
+            <div class="links"><a href="About%20Us.html">About Us</a><a href="Contact%20Us.html">Contact Us</a></div>
+            <div class="social-icons"><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-facebook"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-instagram-outline"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-twitter"></i></a></div>
         </div>
     </footer>
     <script src="assets/js/jquery.min.js"></script>

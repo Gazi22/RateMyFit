@@ -2,9 +2,10 @@ package com.ratemyfit.ratemyfit.controller;
 
 //https://www.codejava.net/frameworks/spring-boot/spring-boot-crud-example-with-spring-mvc-spring-data-jpa-thymeleaf-hibernate-mysql
 
+import com.ratemyfit.ratemyfit.model.Comment;
 import com.ratemyfit.ratemyfit.model.PinwallEntry;
 import com.ratemyfit.ratemyfit.model.User;
-import com.ratemyfit.ratemyfit.repository.PinwallEntryRepository;
+import com.ratemyfit.ratemyfit.service.CommentService;
 import com.ratemyfit.ratemyfit.service.CustomUserDetails;
 import com.ratemyfit.ratemyfit.service.CustomUserDetailsService;
 import com.ratemyfit.ratemyfit.service.PinwallEntryService;
@@ -34,7 +35,8 @@ public class PinwallEntryController {
 
     @Autowired
     private PinwallEntryService pinwallEntryService;
-
+    @Autowired
+    private CommentService commentService;
 
 
     @RequestMapping("/index_p")
@@ -46,12 +48,26 @@ public class PinwallEntryController {
         return "index_p";
     }
 
+    @RequestMapping("/my_fit")
+    public String viewMyFit(Model model) {
+        CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User user = customUserDetails.getUser();
+
+        List<PinwallEntry> listPinwallentry = pinwallEntryService.listAllCurrentUserPosts(user.getId());
+
+
+        model.addAttribute("listPinwallentry", listPinwallentry);
+
+        return "my_fit";
+    }
+
     @RequestMapping("/new")
     public String showNewPinwallEntryPage(Model model) {
         PinwallEntry pinwallEntry = new PinwallEntry();
         model.addAttribute("pinwallentry", pinwallEntry);
 
-        return "new_post_view";
+        return "upload_your_fit";
     }
 
     //https://www.codejava.net/frameworks/spring-boot/spring-boot-file-upload-tutorial
@@ -70,6 +86,7 @@ public class PinwallEntryController {
 
         CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+
         User author = customUserDetails.getUser();
         pinwallEntry.setPostOn(Calendar.getInstance());
         pinwallEntry.setPicture(imageFile.getOriginalFilename());
@@ -81,15 +98,13 @@ public class PinwallEntryController {
             Files.write(path, bytes);
 
 
-
-
         } catch (Exception e) {
             e.printStackTrace();
 
 
             returnValue = "error";
         }
-        return "redirect:/";
+        return "my_fit";
 
 
     }
@@ -111,19 +126,22 @@ public class PinwallEntryController {
         return "redirect:/";
     }
 
-    @GetMapping("/findPost")
-    public String findPost(Model model, @Param(value="id") Long id) {
+    @RequestMapping("/find_post/{id}")
+    public String findPost(Model model,Comment comment, @PathVariable(name="id") Long id) {
 
-
+        comment = new Comment();
 
         List<PinwallEntry> listPinwallentry = pinwallEntryService.listAll(id);
-
+        List<Comment> listComment= commentService.listAll(id);
 
         model.addAttribute("id", id);
         model.addAttribute("listPinwallentry", listPinwallentry);
-
-        return "show_postPage";
+        model.addAttribute("listComment", listComment);
+        model.addAttribute("comment", comment);
+        return "rate_my_fit_post";
     }
+
+
 
     }
 

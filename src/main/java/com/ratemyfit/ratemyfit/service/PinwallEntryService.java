@@ -2,6 +2,7 @@ package com.ratemyfit.ratemyfit.service;
 
 import java.util.List;
 
+import com.ratemyfit.ratemyfit.model.Comment;
 import com.ratemyfit.ratemyfit.model.PinwallEntry;
 import com.ratemyfit.ratemyfit.model.User;
 import com.ratemyfit.ratemyfit.repository.PinwallEntryRepository;
@@ -26,7 +27,18 @@ public class PinwallEntryService {
         return pinwallEntryRepository.findAll();
     }
 
+    public List<PinwallEntry> listAllCurrentUserPosts(Long id) {
+        if (id != null){
+            return pinwallEntryRepository.listAllCurrentUser(id);
+        }
+        return pinwallEntryRepository.findAll();
+    }
 
+
+    public PinwallEntry getPinwallentryForID(Long id) {
+
+        return pinwallEntryRepository.findbyentryid(id);
+    }
 
     public PinwallEntry save(PinwallEntry pinwallEntry) {
         pinwallEntryRepository.save(pinwallEntry);

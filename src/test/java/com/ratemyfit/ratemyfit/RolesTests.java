@@ -1,48 +1,49 @@
 package com.ratemyfit.ratemyfit;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import com.ratemyfit.ratemyfit.model.Comment;
-import com.ratemyfit.ratemyfit.model.PinwallEntry;
+import com.ratemyfit.ratemyfit.model.Role;
 import com.ratemyfit.ratemyfit.model.User;
-import com.ratemyfit.ratemyfit.repository.CommentRepository;
-import com.ratemyfit.ratemyfit.repository.PinwallEntryRepository;
 import com.ratemyfit.ratemyfit.repository.UserRepository;
+import com.ratemyfit.ratemyfit.service.CustomUserDetails;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.annotation.Rollback;
 
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
-public class UserRepositoryTests {
+public class RolesTests {
 
+CustomUserDetails customUserDetails;
 
     @Autowired
     private UserRepository userRepo;
 
+
     @Autowired
     private TestEntityManager entityManager;
 
+
     @Test
-    public void testCreateUser(){
-        User user = new User();
-        user.setEmail("kek999@gmail.com");
-        user.setPassword("Florian2020");
-        user.setFirstName("Florian");
-        user.setLastName("Jäger");
+    public void testCreateAddress(){
 
-        User savedUser = userRepo.save(user);
+       User user1 = userRepo.findByEmail("test3@test.com");
+        Set<Role> roles = user1.getRoles();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        User existUser = entityManager.find(User.class, savedUser.getId());
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
 
-        assertThat(existUser.getEmail()).isEqualTo(user.getEmail());
+        userRepo.save(user1);
+
+
     }
-
-
 }
