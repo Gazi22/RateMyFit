@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      style="background: #cfb841;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Project Page - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arbutus">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+<link rel="stylesheet" href="C:\Users\gazme\Desktop\Internet Technology Project - Rate My Fit\Background_CSS_Code.css" />
+</head>
+
+<body>
+<nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(254,9,9);opacity: 1;background: linear-gradient(rgb(119,63,63) 10%, rgb(146,94,49) 51%, rgb(211,168,15) 100%), linear-gradient(black, white);">
+    <div class="container"><a class="navbar-brand logo" th:href="@{/homepage}" style="color: rgb(255,255,255);background: linear-gradient(rgb(198,164,44), rgb(186,170,91)), #983b3b;font-size: 30px;width: 180px;padding: 13px;">Rate My Fit</a><button data-toggle="collapse" class="navbar-toggler"
+                                                                                                                                                                                                                                                         data-target="#navbarNav" style="color: rgb(255,0,0);"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav" style="background: linear-gradient(rgb(190,176,53) 55%, rgb(177,158,56)), #8c3131;font-size: 20px;padding: 13px;margin: 2px;">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link active" th:href="@{/homepage}">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{/all_fits}">All Fits</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/my_fit}">My Fit</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/ratings_comments}">Ratings / Comments</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/profile}"> Profile</a></li></ul>
+
+            <a th:href="@{/register}"><button class="btn btn-primary" type="button">Register</button></a>
+            &nbsp;
+            <a th:href="@{/login}"><button class="btn btn-primary" type="button">Login</button></a></div>
+
+    </div>
+    </nav>
+    <main class="page project-page">
+        <section class="portfolio-block project" style="background: #803838;">
+            <div class="container" style="background: #c9b131;">
+                <div class="heading">
+                    <h2 class="align-content-center mt-auto align-items-sm-center mt-sm-auto align-items-md-center align-items-lg-center justify-content-xl-center align-items-xl-center">About us</h2>
+                </div>
+                <div class="image" style="background-image:url(&quot;assets/img/tech/image4.jpg&quot;);"></div>
+                <div class="row">
+                    <div class="col-12 col-md-6 offset-md-1 info">
+                        <h3>Rate My Fit - Who are we?</h3>
+                        <p class="d-table-row">Rate My Fit is a website where your unique style is appreciated! We encourage every individual who wants to show his / her choice of style to present it here and let other people rate it with constructive critique.&nbsp;</p>
+                        <p></p>
+                    </div>
+                    <div class="col-12 col-md-3 offset-md-1 meta">
+                        <div class="tags"><span class="meta-heading"><span style="text-decoration: underline;">Founders:</span></span><span class="meta-heading">Florian Jäger</span><span class="meta-heading">Davide Seabra</span><span class="meta-heading">Michelle Flück</span><span class="meta-heading">Gazmend Shefiu</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="page-footer" style="background: rgb(231,190,85);">
+        <div class="container">
+            <div class="links"><a th:href="@{/about_us}" >About Us</a><a th:href="@{/contact_us}">Contact Us</a></div>            <div class="social-icons"><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-facebook"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-instagram-outline"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-twitter"></i></a></div>
+        </div>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>

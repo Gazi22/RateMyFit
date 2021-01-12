@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<h2>List of all trade</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Post ID</th>
+        <th>Post Text</th>
+        <th>Post Picture</th>
+        <th>Post Date</th>
+    </tr>
+    </thead>
+
+
+
+    <tbody>
+    <div>
+
+    <tr th:each="pinwallentry : ${listPinwallentry}">
+        <td th:text="${pinwallentry.id}"></td>
+        <td th:text="${pinwallentry.wallentry}"></td>
+        <td> <img th:src="@{${pinwallentry.outfitImagePath}}" style="width: 100px"></td>
+        <td th:text="${pinwallentry.postOn}"></td>
+
+    </tr>
+    </div>
+
+    <tr th:each="comment : ${listComment}">
+        <td th:text="${comment.getUserName()}"></td>
+        <td th:text="${comment.getCommentText()}"></td>
+    </tr>
+
+
+
+
+    </tbody>
+</table>
+
