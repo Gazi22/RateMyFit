@@ -10,11 +10,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * PinwallEntry.java
- * Purpose: Pinwallentry Entity - Declare fields of table Pinwallentry and manages the relationships /foreignkeys to the other tables
- * @author Florian Jäger
- */
 @Entity
 @Table(name = "wall")
 public class PinwallEntry {
@@ -45,13 +40,11 @@ public class PinwallEntry {
     @JoinColumn(name = "pinwall_id")
     protected Set<Comment> comment=new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "pinwall_id")
+    protected Set<Rating> rating=new HashSet<>();
 
 
-
-
-/**
-     *  Rating currently not implemented
-     */
 
  /*   @Column(name="rating")
     private float rating;
@@ -143,11 +136,6 @@ public class PinwallEntry {
 
     }
 
-    
-    /**
-     * Tried to combine two lists - keeping the code for possible future implementations
-     */
-
     public String getBoth(){
 
          List<String> list1= comment.stream().map(Comment::getUserName).collect(Collectors.toList());
@@ -175,8 +163,19 @@ public class PinwallEntry {
         return usernameAndComment;
     }
 
+    public Set<Rating> getRating() {
+        return rating;
+    }
+
+    public void setRating(Set<Rating> rating) {
+        this.rating = rating;
+    }
+
     public void setComment(Set<Comment> comment) {
         this.comment = comment;
     }
+
+
+
 }
 
