@@ -7,6 +7,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ 
+ * MvcConfig.java
+ * Purpose: Picture ppload path handler.
+  * @author Florian Jäger
+ */
+
+
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
     @Override
