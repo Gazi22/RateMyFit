@@ -25,7 +25,7 @@ import java.util.List;
 
 
 /**
- * AppController.java
+ * CommentController.java
  * Purpose: CommentController - Managing views and Mapping (POST, GET) of the Comment entity
  * @author Florian Jäger
  */
