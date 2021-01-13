@@ -1,8 +1,12 @@
 package com.ratemyfit.ratemyfit.model;
 import javax.persistence.*;
 
-//https://www.codejava.net/frameworks/spring-boot/spring-boot-security-role-based-authorization-tutorial
 
+/**
+ * Role.java
+ * Purpose: Role Entity - Declare fields of table Role and manages the relationships /foreignkeys to the other tables
+ * @author Florian Jäger
+ */
 @Entity
 @Table(name = "roles")
 public class Role {
