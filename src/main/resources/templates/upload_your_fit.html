@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Projects - Brand</title>
+    <title>RateMyFit - Upload Your Fit</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
@@ -22,23 +22,21 @@
 <link rel="stylesheet" href="C:\Users\gazme\Desktop\Internet Technology Project - Rate My Fit\Background_CSS_Code.css" />
 </head>
 
-<body style="color: rgb(0,0,0);background: rgb(231,190,85);">
+<body>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(254,9,9);opacity: 1;background: linear-gradient(rgb(119,63,63) 10%, rgb(146,94,49) 51%, rgb(211,168,15) 100%), linear-gradient(black, white);">
-        <div class="container"><a class="navbar-brand logo" th:href="@{/homepage}" style="color: rgb(255,255,255);background: linear-gradient(rgb(198,164,44), rgb(186,170,91)), #983b3b;font-size: 30px;width: 180px;padding: 13px;">Rate My Fit</a><button data-toggle="collapse" class="navbar-toggler"
-                data-target="#navbarNav" style="color: rgb(255,0,0);"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarNav" style="background: linear-gradient(rgb(190,176,53) 55%, rgb(177,158,56)), #8c3131;font-size: 20px;padding: 13px;margin: 2px;">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link active" th:href="@{/homepage}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" th:href="@{/index_p}">All Fits</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/my_fit}">My Fit</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/find_comments}">Ratings / Comments</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/profile}">Profile</a></li></ul>
+        <div class="container"><a class="navbar-brand logo" th:href="@{/homepage}" style="color: rgb(255,255,255);background: linear-gradient(rgb(198,164,44), rgb(186,170,91)), #983b3b;font-size: 30px;width: 180px;padding: 13px;">Rate My Fit</a><button class="navbar-toggler" data-toggle="collapse" style="color: rgb(255,0,0);"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav" style="background: linear-gradient(rgb(190,176,53) 55%, rgb(177,158,56)), #8c3131;font-size: 20px;padding: 13px;margin: 2px;">
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link active" th:href="@{/homepage}">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" th:href="@{/all_fits}">All Fits</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/my_fit}">My Fit</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/find_comments}">Ratings / Comments</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/profile}">Profile</a></li></ul>
 
-                <a th:href="@{/register}"><button class="btn btn-primary" type="button">Register</button></a>
-                &nbsp;
-                <a th:href="@{/login}"><button class="btn btn-primary" type="button">Login</button></a></div>
+    <a th:href="@{/register}"><button class="btn btn-primary" type="button">Register</button></a>
+    &nbsp;
+    <a th:href="@{/login}"><button class="btn btn-primary" type="button">Login</button></a></div>
 
-        </div>
+</div></div>
     </nav>
     <main class="page projects-page">
         <section class="align-items-center align-content-center align-self-center portfolio-block projects-with-sidebar" style="background: #e7bc4c;">
@@ -56,7 +54,7 @@
                             <li></li>
                         </ul>
                         <tr>
-                            <img id="thumbnail" alt="Picture Preview" />
+                            <img id="thumbnail" alt="Picture Preview" height=500 width=300/>
                         </tr>
 
                     </div>
@@ -68,18 +66,20 @@
                             th:action="@{/save}" th:object="${pinwallentry}"
                             method="post" enctype="multipart/form-data">
                             <div style="width: 200px;">
+                                <label for="text-area-description">Enter Description:</label><br><br>
                                 <div class="text-center"></div>
                                 <div class="text-center mt-2"></div>
                             </div>
 
                            <!-- Input für Post Text  -->
-                            <input type="text" th:field="*{wallentry}" />
+                            <input type="text" placeholder="Description of your post" th:field="*{wallentry}" />
                             <!--<input  type="text" th:field="*{wallentry}" class="form-control-plaintext"
                                     value="Description" readnonly="">-->
                             <div class="form-group files color"><input type="file" name="imageFile" id="imageFile"></div>
 
                           <!-- Submit Button  -->
-                            <a tcolspan="2"><button type="submit">Submit Post</button></a>
+
+                            <a tcolspan="2"><button class="btn btn-primary" button type="submit">Submit Post </button></a>
                         </form>
 
 
@@ -91,7 +91,7 @@
     </main>
     <footer class="page-footer" style="background: rgb(231,190,85);">
         <div class="container">
-            <div class="links"><a th:href="@{/about_us}" >About Us</a><a th:href="@{/contact_us}">Contact Us</a> </div>
+            <div class="links"><a th:href="@{/about_us}">About Us</a><a th:href="@{/contact_us}">Contact Us</a></div>
             <div class="social-icons"><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-facebook"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-instagram-outline"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-twitter"></i></a></div>
         </div>
     </footer>
