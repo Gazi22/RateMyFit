@@ -7,7 +7,7 @@ import javax.servlet.ServletContext;
 
 /**
  
- * MvcConfig.java
+ * SecurityApplicationInitializer.java
  * Purpose: MultipartFilter for Picture upload
   * @author Florian Jäger
  */
