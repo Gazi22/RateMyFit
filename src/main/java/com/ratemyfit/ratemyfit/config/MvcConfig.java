@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 /**
  
  * MvcConfig.java
- * Purpose: Picture ppload path handler.
+ * Purpose: Picture upload path handler.
   * @author Florian Jäger
  */
 
