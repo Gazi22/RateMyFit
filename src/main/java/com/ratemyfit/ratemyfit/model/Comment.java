@@ -7,11 +7,7 @@ import java.time.Instant;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
-/**
- * Comment.java
- * Purpose: Comment Entity - Declare fields of table Comment and manages the relationships /foreignkeys to the other tables
- * @author Florian Jäger
- */
+
 @Entity
 public class Comment {
     @Id
@@ -80,3 +76,4 @@ public class Comment {
 
 
 }
+
