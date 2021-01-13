@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" style="background: rgb(231,190,85);">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -9,8 +9,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arbutus">
+    <link rel="stylesheet" href="assets/css/FontAwesome.css">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/animated-textbox3-1.css">
+    <link rel="stylesheet" href="assets/css/animated-textbox3.css">
+    <link rel="stylesheet" href="assets/css/Custom-File-Upload.css">
+    <link rel="stylesheet" href="assets/css/Drag-Drop-File-Input-Upload.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="assets/css/User-Rating-F19690.css">
+    <link rel="stylesheet" href="assets/css/User-rating.css">
 <link rel="stylesheet" href="C:\Users\gazme\Desktop\Internet Technology Project - Rate My Fit\Background_CSS_Code.css" />
 </head>
 
@@ -23,7 +31,7 @@
                 <li class="nav-item"><a class="nav-link active" th:href="@{/homepage}">Home</a></li>
                 <li class="nav-item"><a class="nav-link active" th:href="@{/all_fits}">All Fits</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/my_fit}">My Fit</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/ratings_comments}">Ratings / Comments</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/find_comments}">Ratings / Comments</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/profile}">Profile</a></li></ul>
 
             <a th:href="@{/register}"><button class="btn btn-primary" type="button">Register</button></a>
@@ -31,34 +39,35 @@
             <a th:href="@{/login}"><button class="btn btn-primary" type="button">Login</button></a></div>
 
     </div>
-    </nav>
+
+</nav>
     <main class="page hire-me-page">
         <section class="portfolio-block hire-me" style="background: rgb(231,190,85);">
             <div class="container">
                 <div class="heading">
-                    <h2>My Profile</h2>
+                    <h2>My Profile settings</h2>
                 </div>
                 <form>
-                    <div class="form-group"><label for="subject">Choose Gender</label><select class="form-control" id="subject"><option value="" selected="">Choose Subject</option><option value="1">Subject 1</option><option value="2">Subject 2</option><option value="3">Subject 3</option></select></div>
-                    <div
-                        class="form-group"><label for="email">Email</label><input class="form-control" type="email" id="email"></div>
-            <div class="form-group"><label for="message">Profile Bio</label><textarea class="form-control" id="message"></textarea></div>
-            <div class="form-group">
-                <div class="form-row">
-                    <div class="col-md-6"><label for="hire-date">Birthday</label><input class="form-control" id="hire-date" type="date"></div>
-                </div>
-            </div>
-            </form>
+                    <div class="form-group"><label for="Username">Username</label></div><input class="form-control" type="text" th:field="*{user.username}" id="Username" placeholder="Username" disabled="" readonly=""></in>
+                    <div class="form-group"><label for="email">Email</label><input class="form-control" type="text" th:field="*{user.email}" id="email" placeholder="example@gmail.com" disabled="" readonly="">
+                    <div class="form-group"><label for="Street">Street</label></div><input class="form-control" type="text" th:field="*{address.streetName}" id="Street" placeholder="Street" disabled="" readonly="">
+                        <div class="form-group"><label for="City">City</label></div><input class="form-control" type="text" th:field="*{address.cityName}" id="City" placeholder="City" disabled="" readonly="">
+                    </div>
+
+                </form>
             </div>
         </section>
     </main>
-    <footer class="page-footer" style="background: rgb(231,190,85);">
-        <div class="container">
-            <div class="links"><a th:href="@{/about_us}" >About Us</a><a th:href="@{/contact_us}">Contact Us</a>    </div>            <div class="social-icons"><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-facebook"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-instagram-outline"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-twitter"></i></a></div>
-        </div>
-    </footer>
+<footer class="page-footer" style="background: rgb(231,190,85);">
+    <div class="container">
+        <div class="links"><a th:href="@{/about_us}" >About Us</a><a th:href="@{/contact_us}">Contact Us</a> </div>
+        <div class="social-icons"><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-facebook"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-instagram-outline"></i></a><a href="#" style="background: rgb(0,0,0);"><i class="icon ion-social-twitter"></i></a></div>
+    </div>
+</footer>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/Custom-File-Upload.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="assets/js/theme.js"></script>
 </body>
