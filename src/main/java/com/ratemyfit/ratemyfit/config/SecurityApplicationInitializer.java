@@ -5,13 +5,6 @@ import org.springframework.web.multipart.support.MultipartFilter;
 
 import javax.servlet.ServletContext;
 
-/**
- 
- * SecurityApplicationInitializer.java
- * Purpose: MultipartFilter for Picture upload
-  * @author Florian Jäger
- */
-
 public class SecurityApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
 
     @Override
@@ -20,3 +13,4 @@ public class SecurityApplicationInitializer extends AbstractSecurityWebApplicati
     }
 
 }
+
