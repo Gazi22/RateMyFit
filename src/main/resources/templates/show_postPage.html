@@ -17,7 +17,8 @@
 
     <tbody>
     <div>
-
+<!--  Important are the th:each ad <img th src:...
+      The table format is not ncessary t all, but the below "comment" part should be in a different <div> tag -->
     <tr th:each="pinwallentry : ${listPinwallentry}">
         <td th:text="${pinwallentry.id}"></td>
         <td th:text="${pinwallentry.wallentry}"></td>
