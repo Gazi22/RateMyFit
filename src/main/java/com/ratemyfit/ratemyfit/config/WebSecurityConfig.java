@@ -14,40 +14,23 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
-
-/**
- 
- * WebSecurityConfig.java
- * Purpose: Handling spring security configurations
- * @author Florian Jäger
- * Adapted from source: https://www.codejava.net/frameworks/spring-boot/user-registration-and-login-tutorial
- */
+//https://www.codejava.net/frameworks/spring-boot/user-registration-and-login-tutorial
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /**
-     * Create Bean for CustomerUserDetailService
-     */
+
     @Bean
     public UserDetailsService userDetailsService() {
         return new CustomUserDetailsService();
     }
 
-    /**
-     * Create Bean for password hashing -> Crypt encoder
-     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    
-     /**
-     * Create Bean for DaoAuthenticationProvider
-     */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -57,31 +40,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
-    
-     /**
-     * Override function of AuthenticationManagerBuilder "configure"
-     */    
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
-    
-    
-    /**
-     * Override configure function to manage behavior and restrictions of Spring Security
-     */
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-                .antMatchers("/new").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-                .antMatchers("/my_fit").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-                .antMatchers("/ratings_comments").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-                .antMatchers("/find_comments").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-                .antMatchers("/save").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-                .antMatchers("/save_c/{id}").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-                .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
-                .antMatchers("/delete/**").hasAuthority("ADMIN")
+                .antMatchers("/").authenticated()
+                .antMatchers("/new").authenticated()
+                .antMatchers("/my_fit").authenticated()
+                .antMatchers("/ratings_comments").authenticated()
+                .antMatchers("/find_comments").authenticated()
+                .antMatchers("/save").authenticated()
+                .antMatchers("/save_c/{id}").authenticated()
+                .antMatchers("/save_r/{id}").authenticated()
+                .antMatchers("/edit/**").authenticated()
+                .antMatchers("/delete/**").authenticated()
+                .antMatchers("/profile").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
