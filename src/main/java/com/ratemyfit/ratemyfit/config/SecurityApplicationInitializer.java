@@ -5,6 +5,13 @@ import org.springframework.web.multipart.support.MultipartFilter;
 
 import javax.servlet.ServletContext;
 
+/**
+ 
+ * MvcConfig.java
+ * Purpose: MultipartFilter for Picture upload
+  * @author Florian Jäger
+ */
+
 public class SecurityApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
 
     @Override
