@@ -7,7 +7,12 @@ import java.util.stream.Collectors;
 
 import static javax.persistence.FetchType.LAZY;
 
-//https://www.codejava.net/frameworks/spring-boot/user-registration-and-login-tutorial
+
+/**
+ * Address.java
+ * Purpose: Address Entity - Declare fields of table Address and manages the relationships /foreignkeys to the other tables
+ * @author Florian Jäger
+ */
 
 @Entity
 public class Address {
