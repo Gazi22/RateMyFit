@@ -17,4 +17,3 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/outfits/**").addResourceLocations("file:/"+ pictureUploadPath + "/");
     }
 }
-

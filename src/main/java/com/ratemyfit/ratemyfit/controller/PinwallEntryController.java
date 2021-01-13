@@ -101,7 +101,7 @@ public class PinwallEntryController {
 
             returnValue = "error";
         }
-        return "homepage";
+        return "/homepage";
 
 
     }

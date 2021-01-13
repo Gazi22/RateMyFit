@@ -1,28 +1,30 @@
 package com.ratemyfit.ratemyfit.model;
 
 
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
+
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 
 @Entity
-public class Comment {
+public class Rating {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @Column
-    private String commentText;
+    private int rating;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "pinwall_id", referencedColumnName = "id")
     private PinwallEntry pinwallEntry;
 
-    @Column
-    private Instant post_on_date;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -37,13 +39,7 @@ public class Comment {
         this.id = id;
     }
 
-    public String getCommentText() {
-        return commentText;
-    }
 
-    public void setCommentText(String commentText) {
-        this.commentText = commentText;
-    }
 
     public PinwallEntry getPinwallEntry() {
         return pinwallEntry;
@@ -53,13 +49,7 @@ public class Comment {
         this.pinwallEntry = pinwallEntry;
     }
 
-    public Instant getCreatedDate() {
-        return post_on_date;
-    }
 
-    public void setCreatedDate(Instant createdDate) {
-        this.post_on_date = createdDate;
-    }
 
     public User getUser() {
         return user;
@@ -74,5 +64,20 @@ public class Comment {
     }
 
 
+    public int getRating() {
+        return rating;
+    }
 
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getAverageRating (){
+        String avgRatingText="";
+        List<Integer> ratingList =pinwallEntry.getRating().stream().map(Rating::getRating).collect(Collectors.toList());
+        int listSize = ratingList.size();
+        float avrgRating=ratingList.stream().reduce(0,Integer::sum)/ (float)listSize;
+        avgRatingText=String.valueOf(avrgRating)+" "+ "AVERAGE RATING";
+        return avgRatingText;
+    }
 }
