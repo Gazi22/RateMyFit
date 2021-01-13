@@ -9,8 +9,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-//https://www.codejava.net/frameworks/spring-boot/user-registration-and-login-tutorial
-
+/**
+ * User.java
+ * Purpose: User Entity - Declare fields of table User and manages the relationships /foreignkeys to the other tables
+ * @author Florian Jäger
+ */
 @Entity
 public class User {
     @Id
