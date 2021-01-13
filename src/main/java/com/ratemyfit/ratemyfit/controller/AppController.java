@@ -14,25 +14,40 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-//https://www.codejava.net/frameworks/spring-boot/user-registration-and-login-tutorial
 
+/**
+
+ * AppController.java
+ * Purpose: User Controller - Managing views and Mapping (POST, GET) of the User entity
+ * @author Florian Jäger
+ */
 @Controller
 public class AppController {
 
 
-
+/**
+     * Declare UserRepository as Autowired (Injection to get access to class methods etc.)
+     */
     @Autowired
     private UserRepository userRepo;
-
+    
+/**
+     * Declare AddressRepository as Autowired (Injection to get access to class methods etc.)
+     */
     @Autowired
     private AddressRepository addressRepository;
 
+    /**
+     * Return to homepage
+     */
     @GetMapping("")
     public String viewHomePage() {
         return "homepage";
     }
 
-
+/**
+     * Create new User and address + open the register view
+     */
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
@@ -41,6 +56,10 @@ public class AppController {
         return "register";
     }
 
+    
+    /**
+     * Process Register - save the entered data in the user / address into the corresponding repository
+     */
     @PostMapping("/process_register")
     public String processRegister(@Valid @ModelAttribute("user") User user,@ModelAttribute("address") Address address) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -65,7 +84,10 @@ public class AppController {
 
 
 
-
+    /**
+     * //Currently not in use//
+     * View that returns all registered users (Intended for the admin to manage users.)
+     */
     @GetMapping("/users")
     public String listUsers(Model model) {
         List<User> listUsers = userRepo.findAll();
@@ -75,27 +97,47 @@ public class AppController {
     }
 
 
-
+     /**
+     * Return to all_fits view
+     */
     @GetMapping("/all_fits")
     public String viewAllFitsPage() {return "all_fits_old";}
 
+     /**
+     * Return to ratings_comments view
+     */
     @GetMapping("/ratings_comments")
     public String viewMyRatingsandComments() {return "ratings_comments";}
 
+     /**
+     * Return to profile view
+     */
     @GetMapping("/profile")
     public String viewSettings() {return "profile";}
 
+     /**
+     * Return to contact_us view
+     */
     @GetMapping("/contact_us")
     public String viewContactUs() {return "contact_us";}
 
+     /**
+     * Return to about_us view
+     */
     @GetMapping("/about_us")
     public String viewAboutUs() {return "about_us";}
 
+     /**
+     * Return to /homepage 2 -> to call homepage by using "/homepage"
+     */
     @GetMapping("/homepage")
     public String viewHomepage() {
         return "homepage";
     }
 
+     /**
+     * Return username to e.g. thymleaf field
+     */
    @RequestMapping(value = "/username", method = RequestMethod.GET)
     @ResponseBody
     public String currentUserName(Authentication authentication){
@@ -103,7 +145,9 @@ public class AppController {
    }
 
 
-
+ /**
+     * NOT USED
+     */
     @GetMapping("/giveAuthority")
     public String giveAuthority(Model model) {
         List<User> listUsers = userRepo.findAll();
@@ -113,6 +157,10 @@ public class AppController {
         return "users";
     }
 
+    
+     /**
+     * Login process - returns the login view
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null)
