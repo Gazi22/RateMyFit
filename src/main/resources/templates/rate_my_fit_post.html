@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="utf-8">
@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
     <link rel="stylesheet" href="assets/css/User-Rating-F19690.css">
     <link rel="stylesheet" href="assets/css/User-rating.css">
-<link rel="stylesheet" href="C:\Users\gazme\Desktop\Internet Technology Project - Rate My Fit\Background_CSS_Code.css" />
 </head>
 
 <body>
@@ -55,7 +54,7 @@
 
 
 
-
+<form>
 	<div class="card">
 	    <div class="card-body">
 	        <div class="row">
@@ -75,9 +74,11 @@
 	        </div>
         </div>
     </div>
+</form>
 
 
-            <div th:each="pinwallentry : ${listPinwallentry}">
+
+<div th:each="pinwallentry : ${listPinwallentry}">
 <form th:action="@{'/save_c/' + ${pinwallentry.id}}" th:object="${comment}"
             method="post" enctype="multipart/form-data">
 <div class="card text-white bg-primary mb-1">
@@ -97,22 +98,31 @@
  
   </div>
 </div>
-
 </form>
+</div>
+        </section>
+        </form>
             </div>
 
             <div th:each="pinwallentry : ${listPinwallentry}">
             <form th:action="@{'/save_r/' + ${pinwallentry.id}}" th:object="${rating}"
       method="post" enctype="multipart/form-data">
-<input type="number" min = 1 max = 5 class="form-control-lg" style="max-width: 400;width: 500;min-width: 500;" />
+<input type="number" min = 1 max = 5 class="form-control-lg" />
  
         <div class="row">
             <button class="btn btn-primary" type="button">Submit</button>
         </div>
 
 </form>
-            </div>
-        </section>
+        </div>
+
+
+        <div>
+            <a th:text="${rating.getAverageRating()}"></a>
+
+        </div>
+
+
 <div class="user-body"><span class="heading">User Rating</span>
     <p>4.1 average based on 254 reviews.</p>
     <hr style="border:3px solid #f1f1f1" />
