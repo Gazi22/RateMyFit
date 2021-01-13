@@ -26,19 +26,36 @@ import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.List;
 
-//https://www.codejava.net/frameworks/spring-boot/spring-boot-crud-example-with-spring-mvc-spring-data-jpa-thymeleaf-hibernate-mysql
+/**
+ * PinwallEntryController.java
+ * Purpose: PinwallEntry Controller - Managing views and Mapping (POST, GET) of the Pinwallentry entity
+ * @author Florian Jäger
+ */
 
 @Controller
 public class PinwallEntryController {
 
+    /**
+     * Declare CustomUserDetailsService as Autowired (Injection to get access to class methods etc.)
+     */
+    @Autowired
     CustomUserDetailsService customUserDetailsService;
 
+     /**
+     * Declare PinwallEntryService as Autowired (Injection to get access to class methods etc.)
+     */
     @Autowired
     private PinwallEntryService pinwallEntryService;
+    
+     /**
+     * Declare CommentService as Autowired (Injection to get access to class methods etc.)
+     */
     @Autowired
     private CommentService commentService;
 
-
+    /**
+     * List all posts and return the index_p (all_fits) view
+     */
     @RequestMapping("/index_p")
     public String viewPinwallentryPage(Model model) {
         Long id = null;
@@ -48,6 +65,9 @@ public class PinwallEntryController {
         return "index_p";
     }
 
+    /**
+     * List posts of the cuirrent user and return the view my_fit
+     */
     @RequestMapping("/my_fit")
     public String viewMyFit(Model model) {
         CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -62,6 +82,9 @@ public class PinwallEntryController {
         return "my_fit";
     }
 
+    /**
+     * return the view upload_your_fit to create a post
+     */
     @RequestMapping("/new")
     public String showNewPinwallEntryPage(Model model) {
         PinwallEntry pinwallEntry = new PinwallEntry();
@@ -70,12 +93,13 @@ public class PinwallEntryController {
         return "upload_your_fit";
     }
 
-    //https://www.codejava.net/frameworks/spring-boot/spring-boot-file-upload-tutorial
+    /**
+     * Save a post with multipartfile for the picture of the outfit
+     * Adapted from //https://www.codejava.net/frameworks/spring-boot/spring-boot-file-upload-tutorial
+     */
+    
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String savePinwallEntry(PinwallEntry pinwallEntry, @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
-
-
-
 
         String returnValue = "";
         String folder = "./outfits/";
@@ -109,7 +133,10 @@ public class PinwallEntryController {
 
     }
 
-
+    /**
+     * Currently not used
+     * Makes it possible to add posts
+     */
     @RequestMapping("/edit/{id}")
     public ModelAndView showEditPinwallEntryPage(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit_PinwallEntry");
@@ -119,13 +146,19 @@ public class PinwallEntryController {
         return mav;
     }
 
-
+    /**
+     * Let's the user delete his own posts
+     */
     @RequestMapping("/delete/{id}")
     public String deletePinwallEntry(@PathVariable(name = "id") int id) {
         pinwallEntryService.delete(id);
         return "redirect:/";
     }
 
+    
+     /**
+     * Returns the post depending on the ID- return view rate_my_fit_post
+     */
     @RequestMapping("/find_post/{id}")
     public String findPost(Model model,Comment comment, @PathVariable(name="id") Long id) {
 
