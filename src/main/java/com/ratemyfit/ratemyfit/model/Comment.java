@@ -9,7 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Comment.java
- * Purpose: Comment Entity - Declare fields of table Address and manages the relationships /foreignkeys to the other tables
+ * Purpose: Comment Entity - Declare fields of table Comment and manages the relationships /foreignkeys to the other tables
  * @author Florian Jäger
  */
 @Entity
