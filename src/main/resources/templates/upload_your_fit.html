@@ -55,7 +55,10 @@
 
                     </div>
                     <div class="col">
+                      
+                      <!-- WIchtig in form -> save und enctype=multipart, method post-->
                         <form
+                                                   
                             th:action="@{/save}" th:object="${pinwallentry}"
                             method="post" enctype="multipart/form-data">
                             <div style="width: 200px;">
@@ -63,11 +66,13 @@
                                 <div class="text-center mt-2"></div>
                             </div>
 
+                           <!-- Input für Post Text  -->
                             <input type="text" th:field="*{wallentry}" />
                             <!--<input  type="text" th:field="*{wallentry}" class="form-control-plaintext"
                                     value="Description" readnonly="">-->
                             <div class="form-group files color"><input type="file" name="imageFile" id="imageFile"></div>
 
+                          <!-- Submit Button  -->
                             <a tcolspan="2"><button type="submit">Submit Post</button></a>
                         </form>
 
